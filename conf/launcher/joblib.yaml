@@ -1,0 +1,19 @@
+# @package _global_
+defaults:
+  - override /hydra/launcher: joblib
+
+hydra:
+  launcher:
+    n_jobs: 2
+    backend: loky
+    prefer: processes
+    # require: null
+    verbose: 0
+    # timeout: null
+    # pre_dispatch: 3
+    # batch_size: 4
+    # temp_folder: null
+    # max_nbytes: null
+    # mmap_mode: r
+
+multiprocessing_context: fork

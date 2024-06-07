@@ -1,0 +1,3 @@
+[submodule "pythia"]
+	path = pythia
+	url = https://github.com/EleutherAI/pythia.git
