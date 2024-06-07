@@ -47,7 +47,7 @@ Then, install poetry
 curl -sSL https://install.python-poetry.org | python3 -
 ```
 
-Finally, create the conda environement and install the dependencies
+Finally, create the conda environment and install the dependencies
 
 ```bash
 conda create -n memorisation python=3.10 -y
@@ -59,8 +59,8 @@ poetry install --sync
 ## 2. Download Data
 
 To download the pile training set we follow the instructions reported in the [pythia](https://github.com/EleutherAI/pythia?tab=readme-ov-file#exploring-the-dataset).
-The validation split is not currenlty available online. If you want to replicate our analysis, there are sources where it is possible to download the pile unofficially (e.g., `magnet:?xt=urn:btih:0d366035664fdf51cfbe9f733953ba325776e667&dn=EleutherAI_ThePile_v1` has a `pile_val.jsonl.zst`). We do not recommend this way of accessing the data. 
-Also, we emphasise that in our paper we do not publish the any example from the validation data, but only aggregate statistics.
+The validation split is not currently available online. If you want to replicate our analysis, there are sources where it is possible to download the pile unofficially (e.g., `magnet:?xt=urn:btih:0d366035664fdf51cfbe9f733953ba325776e667&dn=EleutherAI_ThePile_v1` has a `pile_val.jsonl.zst`). We do not recommend this way of accessing the data. 
+Also, we emphasise that in our paper we do not publish any example from the validation data, but only aggregate statistics.
 
 To download the training data run the following script.
 
@@ -69,7 +69,7 @@ To download the training data run the following script.
 ./bin/download_data.sh
 ```
 
-This scripts optionally creates the validation split if the validation file (`./data/pile-deduped-validation/raw/pile_val.jsonl`) exists.
+This script optionally creates the validation split if the validation file (`./data/pile-deduped-validation/raw/pile_val.jsonl`) exists.
 
 
 ## 3. Sample Data
@@ -82,7 +82,7 @@ Sample the data from the pile as discussed in Sec. 6 in the paper:
 ./bin/sample_data.sh
 ```
 
-At the end of this process you should obtain the following folder structure
+At the end of this process, you should obtain the following folder structure
 
 ```bash
 data/
@@ -108,7 +108,7 @@ data/
 
 ## 4. Run Inference
 
-All artifacts are present at [https://huggingface.co/datasets/pietrolesci/pythia-deduped-stats][def]. To reproduce them,
+All artefacts are present at [https://huggingface.co/datasets/pietrolesci/pythia-deduped-stats][def]. To reproduce them,
 
 ```bash
 ./bin/run_inference.sh
@@ -132,7 +132,7 @@ outputs/
             └── main.log
 ```
 
-Each `data-pythia-deduped-{model_size}-step{checkpoint}.parquet` contains the raw token statistcs (i.e., surprisal, accuracy, entropy, and rank). Each run might take a lot of disk space (up to 80GB for each model size). To save space you can optionally upload the individual runs for each model size on HuggingFace and remove it from local storage.
+Each `data-pythia-deduped-{model_size}-step{checkpoint}.parquet` contains the raw token statistics (i.e., surprisal, accuracy, entropy, and rank). Each run might take a lot of disk space (up to 80GB for each model size). To save space you can optionally upload the individual runs for each model size on HuggingFace and remove it from local storage.
 
 ```bash
 # NOTE: make sure to modify the script to accommodate your needs
