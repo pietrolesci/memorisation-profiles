@@ -4,7 +4,7 @@
 
 <br>
 
-This is the official implementation for our ALC 2024 paper: "Causal Estimation of Memorisation Profiles".
+This is the official implementation for our ACL 2024 paper: "Causal Estimation of Memorisation Profiles".
 
 [![arXiv](https://img.shields.io/badge/arXiv-1234.56789-b31b1b.svg)](https://arxiv.org/abs/2406.04327v1)
 
