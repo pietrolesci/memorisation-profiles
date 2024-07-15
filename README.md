@@ -59,8 +59,7 @@ poetry install --sync
 ## 2. Download Data
 
 To download the pile training set we follow the instructions reported in the [pythia](https://github.com/EleutherAI/pythia?tab=readme-ov-file#exploring-the-dataset).
-The validation split is not currenlty available online. If you want to replicate our analysis, there are sources where it is possible to download the pile unofficially (e.g., `magnet:?xt=urn:btih:0d366035664fdf51cfbe9f733953ba325776e667&dn=EleutherAI_ThePile_v1` has a `pile_val.jsonl.zst`). We do not recommend this way of accessing the data. 
-Also, we emphasise that in our paper we do not publish the any example from the validation data, but only aggregate statistics.
+The validation split seems not currently available online. If you want to replicate our analysis, there are sources where it is possible to download the pile unofficially (e.g., `magnet:?xt=urn:btih:0d366035664fdf51cfbe9f733953ba325776e667&dn=EleutherAI_ThePile_v1` has a `pile_val.jsonl.zst`). 
 
 To download the training data run the following script.
 
@@ -71,16 +70,26 @@ To download the training data run the following script.
 
 This scripts optionally creates the validation split if the validation file (`./data/pile-deduped-validation/raw/pile_val.jsonl`) exists.
 
+&nbsp;
+> [!TIP]
+> You can download the pile validation split from the HuggingFace Hub `pietrolesci/pile-validation`. It is still a bit confusing whether the Pile data can be released freely. Thus, we will remove this dataset if required. However, we believe this makes it easier for researchers to replicate our analysis. So, once downloaded from the HuggingFace Hub, save the dataset as a jsonl file so that the scripts work normally.
+
 
 ## 3. Sample Data
 
+&nbsp;
+> [!TIP]
+> You can directly get the subset of the Pile used in our experiments from the HuggingFace Hub at `pietrolesci/pile-deduped-subset`.
+
 Sample the data from the pile as discussed in Sec. 6 in the paper: 
 
-> We sample instances from the training set in two steps: we randomly choose 10 batches for each macro-batch and sample 10 instances from each. This process results in 14.3k analysed training instances. Additionally, we sample 2k instances from the validation set to create G∞. This process returns a panel of 16.3k instances
+We sample instances from the training set in two steps: we randomly choose 10 batches for each macro-batch and sample 10 instances from each. This process results in 14.3k analysed training instances. Additionally, we sample 2k instances from the validation set to create $\mathcal{G}_{\infty}$. This process returns a panel of 16.3k instances.
 
 ```bash
 ./bin/sample_data.sh
 ```
+
+
 
 At the end of this process you should obtain the following folder structure
 
@@ -108,7 +117,11 @@ data/
 
 ## 4. Run Inference
 
-All artifacts are present at [https://huggingface.co/datasets/pietrolesci/pythia-deduped-stats][def]. To reproduce them,
+&nbsp;
+> [!TIP]
+> All artifacts are present at [https://huggingface.co/datasets/pietrolesci/pythia-deduped-stats][def]. 
+
+To reproduce our artifacts,
 
 ```bash
 ./bin/run_inference.sh
@@ -161,6 +174,12 @@ data/pile-deduped-stats/
 
 
 ## 5. Run Analysis
+
+&nbsp;
+> [!TIP]
+> You can get the estimated effects (i.e., memorisation profiles) directly from the HuggingFace Hub at `pietrolesci/pythia-deduped-stats`.
+
+
 
 Once you have the aggregated statistics at the sequence level, you can run the memorisation profile causal estimation with
 
