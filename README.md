@@ -4,7 +4,7 @@
 
 <br>
 
-This is the official implementation for our ALC 2024 paper: "Causal Estimation of Memorisation Profiles".
+This is the official implementation for our ACL 2024 paper: "Causal Estimation of Memorisation Profiles".
 
 [![arXiv](https://img.shields.io/badge/arXiv-1234.56789-b31b1b.svg)](https://arxiv.org/abs/2406.04327v1)
 
@@ -47,7 +47,7 @@ Then, install poetry
 curl -sSL https://install.python-poetry.org | python3 -
 ```
 
-Finally, create the conda environement and install the dependencies
+Finally, create the conda environment and install the dependencies
 
 ```bash
 conda create -n memorisation python=3.10 -y
@@ -145,7 +145,7 @@ outputs/
             └── main.log
 ```
 
-Each `data-pythia-deduped-{model_size}-step{checkpoint}.parquet` contains the raw token statistcs (i.e., surprisal, accuracy, entropy, and rank). Each run might take a lot of disk space (up to 80GB for each model size). To save space you can optionally upload the individual runs for each model size on HuggingFace and remove it from local storage.
+Each `data-pythia-deduped-{model_size}-step{checkpoint}.parquet` contains the raw token statistics (i.e., surprisal, accuracy, entropy, and rank). Each run might take a lot of disk space (up to 80GB for each model size). To save space you can optionally upload the individual runs for each model size on HuggingFace and remove it from local storage.
 
 ```bash
 # NOTE: make sure to modify the script to accommodate your needs
