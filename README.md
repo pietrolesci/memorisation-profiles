@@ -70,14 +70,14 @@ To download the training data run the following script.
 
 This scripts optionally creates the validation split if the validation file (`./data/pile-deduped-validation/raw/pile_val.jsonl`) exists.
 
-&nbsp;
+
 > [!TIP]
 > You can download the pile validation split from the HuggingFace Hub `pietrolesci/pile-validation`. It is still a bit confusing whether the Pile data can be released freely. Thus, we will remove this dataset if required. However, we believe this makes it easier for researchers to replicate our analysis. So, once downloaded from the HuggingFace Hub, save the dataset as a jsonl file so that the scripts work normally.
 
 
 ## 3. Sample Data
 
-&nbsp;
+
 > [!TIP]
 > You can directly get the subset of the Pile used in our experiments from the HuggingFace Hub at `pietrolesci/pile-deduped-subset`.
 
@@ -117,7 +117,7 @@ data/
 
 ## 4. Run Inference
 
-&nbsp;
+
 > [!TIP]
 > All artifacts are present at [https://huggingface.co/datasets/pietrolesci/pythia-deduped-stats][def]. 
 
@@ -175,7 +175,7 @@ data/pile-deduped-stats/
 
 ## 5. Run Analysis
 
-&nbsp;
+
 > [!TIP]
 > You can get the estimated effects (i.e., memorisation profiles) directly from the HuggingFace Hub at `pietrolesci/pythia-deduped-stats`.
 
