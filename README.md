@@ -72,14 +72,14 @@ This scripts optionally creates the validation split if the validation file (`./
 
 
 > [!TIP]
-> You can download the pile validation split from the HuggingFace Hub `pietrolesci/pile-validation`. It is still a bit confusing whether the Pile data can be released freely. Thus, we will remove this dataset if required. However, we believe this makes it easier for researchers to replicate our analysis. So, once downloaded from the HuggingFace Hub, save the dataset as a jsonl file so that the scripts work normally.
+> You can download the pile validation split from the HuggingFace Hub [`pietrolesci/pile-validation`](https://huggingface.co/datasets/pietrolesci/pile-validation). It is still a bit confusing whether the Pile data can be released freely. Thus, we will remove this dataset if required. However, we believe this makes it easier for researchers to replicate our analysis. So, once downloaded from the HuggingFace Hub, save the dataset as a jsonl file so that the scripts work normally.
 
 
 ## 3. Sample Data
 
 
 > [!TIP]
-> You can directly get the subset of the Pile used in our experiments from the HuggingFace Hub at `pietrolesci/pile-deduped-subset`.
+> You can directly get the subset of the Pile used in our experiments from the HuggingFace Hub at [`pietrolesci/pile-deduped-subset`](https://huggingface.co/datasets/pietrolesci/pile-deduped-subset).
 
 Sample the data from the pile as discussed in Sec. 6 in the paper: 
 
@@ -119,7 +119,7 @@ data/
 
 
 > [!TIP]
-> All artifacts are present at [https://huggingface.co/datasets/pietrolesci/pythia-deduped-stats][def]. 
+> All artifacts are present at [`pile-deduped-stats`](https://huggingface.co/datasets/pietrolesci/pile-deduped-stats). 
 
 To reproduce our artifacts,
 
@@ -177,7 +177,7 @@ data/pile-deduped-stats/
 
 
 > [!TIP]
-> You can get the estimated effects (i.e., memorisation profiles) directly from the HuggingFace Hub at `pietrolesci/pythia-deduped-stats`.
+> You can get the estimated effects (i.e., memorisation profiles) directly from the HuggingFace Hub at [`pietrolesci/pythia-memorisation-profiles`](https://huggingface.co/datasets/pietrolesci/pythia-memorisation-profiles).
 
 
 
