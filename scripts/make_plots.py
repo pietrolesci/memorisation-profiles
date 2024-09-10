@@ -28,11 +28,9 @@ def main(metric: str) -> None:
         ]
     )
 
-
     if metric == "sup_seq":
         df = (
-            df
-            .query("model_size != '2.8b'")
+            df.query("model_size != '2.8b'")
             .assign(
                 model_size=lambda _df: as_cat(_df["model_size"].str.upper()),
                 memorisation=lambda _df: -_df["ATT"],
@@ -51,12 +49,8 @@ def main(metric: str) -> None:
 
     else:
         df = (
-            df
-            .query("model_size != '2.8b'")
-            .assign(
-                model_size=lambda _df: as_cat(_df["model_size"].str.upper()),
-                memorisation=lambda _df: _df["ATT"],
-            )
+            df.query("model_size != '2.8b'")
+            .assign(model_size=lambda _df: as_cat(_df["model_size"].str.upper()), memorisation=lambda _df: _df["ATT"])
             .assign(
                 stdupper=lambda _df: _df["memorisation"] + (2 * _df["std_error"]),
                 stdlower=lambda _df: _df["memorisation"] - (2 * _df["std_error"]),
@@ -72,65 +66,66 @@ def main(metric: str) -> None:
     mem_prof = (
         pn.ggplot(
             df.query("(time >= cohort) & (zero_not_in_cband == '*')"),
-            pn.aes("time", "cohort", alpha="memorisation", colour="model_size")
-        ) +
-        pn.geom_tile(pn.aes(width=1000, height=1000)) +
-        pn.geom_vline(xintercept=95000, size=.6, colour="black", linetype="dashed", alpha=1) +
-        pn.facet_wrap("model_size", ncol=3) +
-        pn.labs(title="", x="Checkpoint Step", y="Treatment Step") +
-        pn.scale_x_continuous(
-            expand=(0, 0), 
+            pn.aes("time", "cohort", alpha="memorisation", colour="model_size"),
+        )
+        + pn.geom_tile(pn.aes(width=1000, height=1000))
+        + pn.geom_vline(xintercept=95000, size=0.6, colour="black", linetype="dashed", alpha=1)
+        + pn.facet_wrap("model_size", ncol=3)
+        + pn.labs(title="", x="Checkpoint Step", y="Treatment Step")
+        + pn.scale_x_continuous(
+            expand=(0, 0),
             breaks=range(20000, 143000, 20000),
             labels=lambda x: [f"{v / 1000:.0f}k" if i % 2 == 0 and v != 0 else "" for i, v in enumerate(x)],
-        ) +
-        pn.scale_y_continuous(
-            expand=(0, 0), 
-            breaks=range(20000, 143000, 20000), 
+        )
+        + pn.scale_y_continuous(
+            expand=(0, 0),
+            breaks=range(20000, 143000, 20000),
             labels=lambda x: [f"{v / 1000:.0f}k" if i % 2 == 0 else "" for i, v in enumerate(x)],
-        ) +
-        pn.scale_alpha(range=(.5, 1.), guide=None) +
-        pn.scale_colour_discrete(guide=None) +
-        pn.theme_bw(base_size=11) +
-        pn.theme(panel_grid_major=pn.element_blank(), plot_margin=0, plot_background=None, figure_size=(8, 3.2))
+        )
+        + pn.scale_alpha(range=(0.5, 1.0), guide=None)
+        + pn.scale_colour_discrete(guide=None)
+        + pn.theme_bw(base_size=11)
+        + pn.theme(panel_grid_major=pn.element_blank(), plot_margin=0, plot_background=None, figure_size=(8, 3.2))
     )
 
     # mem_prof.save(str(out_path / f"mem_prof_{metric}_full.svg"))
     pn.save_as_pdf_pages([mem_prof], str(out_path / f"mem_prof_{metric}_full.pdf"))
-    
+
     if metric != "sup_seq":
         return
-    
+
     # ====================
     # Memorisation profile
     # ====================
     mem_prof = (
         pn.ggplot(
             df.query("(time >= cohort) & (zero_not_in_cband == '*') & (cohort <= 95000) & (time <= 95000)"),
-            pn.aes("time", "cohort", alpha="memorisation", colour="model_size")
-        ) +
-        pn.geom_tile(pn.aes(width=1000, height=1000)) +
-        pn.facet_wrap("model_size", ncol=3) +
-        pn.labs(title="", x="Checkpoint Step", y="Treatment Step") +
-        pn.scale_x_continuous(
-            expand=(0, 0), 
-            breaks=range(10000, 98000, 10000), 
+            pn.aes("time", "cohort", alpha="memorisation", colour="model_size"),
+        )
+        + pn.geom_tile(pn.aes(width=1000, height=1000))
+        + pn.facet_wrap("model_size", ncol=3)
+        + pn.labs(title="", x="Checkpoint Step", y="Treatment Step")
+        + pn.scale_x_continuous(
+            expand=(0, 0),
+            breaks=range(10000, 98000, 10000),
             labels=lambda x: [f"{v / 1000:.0f}k" if i % 2 == 0 else "" for i, v in enumerate(x)],
-        ) +
-        pn.scale_y_continuous(
-            expand=(0, 0), 
-            breaks=range(10000, 98000, 10000), 
+        )
+        + pn.scale_y_continuous(
+            expand=(0, 0),
+            breaks=range(10000, 98000, 10000),
             labels=lambda x: [f"{v / 1000:.0f}k" if i % 2 == 0 else "" for i, v in enumerate(x)],
-        ) +
-        pn.scale_alpha(range=(.5, 1.), guide=None) +
-        pn.scale_colour_discrete(guide=None) +
+        )
+        + pn.scale_alpha(range=(0.5, 1.0), guide=None)
+        + pn.scale_colour_discrete(guide=None)
+        +
         # pn.scale_colour_manual(guide=None, values=["black", "red", "green", "yellow", "orange", "blue"]) +
-        pn.theme_bw(base_size=11) +
-        pn.theme(panel_grid_major=pn.element_blank(), plot_margin=0, plot_background=None, figure_size=(8, 3.2))
+        pn.theme_bw(base_size=11)
+        + pn.theme(panel_grid_major=pn.element_blank(), plot_margin=0, plot_background=None, figure_size=(8, 3.2))
     )
 
     # mem_prof.save(str(out_path / f"mem_prof_{metric}.svg"))
     pn.save_as_pdf_pages([mem_prof], str(out_path / f"mem_prof_{metric}.pdf"))
-    
+
     # ======================
     # Learning rate schedule
     # ======================
@@ -257,7 +252,6 @@ def main(metric: str) -> None:
 
     # ins_mem.save(str(out_path / f"ins_mem_{metric}.svg"))
     pn.save_as_pdf_pages([ins_mem], str(out_path / f"ins_mem_{metric}.pdf"))
-
 
     # ==================
     # Final memorisation

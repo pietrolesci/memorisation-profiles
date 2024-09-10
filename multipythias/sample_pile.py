@@ -24,8 +24,8 @@ def sample_data_from_pile(
 ) -> pd.DataFrame:
     """Hierarchically sample `n_batches_cohort` batches per cohort. Then, once we have the batches
     sample `n_seq_batch` sequences per batch.
-    """
-    batch_ids = np.array(range(len(pile) // BATCH_SIZE))
+    """    
+    batch_ids = np.array(range(143_000))
     cohorts = set((batch_ids // NUM_BATCHES_PER_COHORT).tolist())
     seed = initial_seed
     rng = check_random_state(seed)
@@ -47,14 +47,19 @@ def sample_data_from_pile(
 
     # create dataframe
     df = pd.DataFrame(samples).explode("seq_idx")
+    print(df)
     df = df.sort_values("seq_idx")
-    df["input_ids"] = df["seq_idx"].map(lambda x: pile[x].tolist())  # type: ignore
+
+    sequences = [pile[x]["text"].tolist() for x in tqdm(df["seq_idx"].tolist())]
+
+    df["input_ids"] = sequences
 
     return df
 
 
 if __name__ == "__main__":
     parser = ArgumentParser()
+    parser.add_argument("--data_path", type=str, default="./data")
     parser.add_argument("--n_batches_cohort", type=int, default=10)
     parser.add_argument("--n_seq_batch", type=int, default=10)
     parser.add_argument("--n_validation", type=int, default=2000)
@@ -64,10 +69,13 @@ if __name__ == "__main__":
     splits = {}
 
     # Sample training data from the pile
-
-    read_dataset(args.data_path, )
+    seed = 0
+    path = Path(f"/mnt/ssd-2/pile_extra_seeds/seed{seed}")
+    pattern = f"pile_20B_tokenizer_text_document_train_0_indexmap_147164160ns_2048sl_{seed if seed != 0 else 1234}s"
+    # pattern = f"pile_20B_tokenizer_text_document_valid_0_indexmap_20583ns_2048sl_{seed if seed != 0 else 1234}s"
+    print(pattern)
     
-    pile = GPT2Dataset(str(data_path / "pile-deduped-train" / "document"), skip_warmup=True)
+    pile = read_dataset(path, pattern=pattern, document_path=path.parent)
     train_df = sample_data_from_pile(
         pile, n_batches_cohort=args.n_batches_cohort, n_seq_batch=args.n_seq_batch, initial_seed=TRAIN_SEED
     )

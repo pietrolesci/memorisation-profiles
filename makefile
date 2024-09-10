@@ -1,4 +1,4 @@
-sources = src/ scripts/
+sources = src/ scripts/ multipythias/
 
 format:
 	ruff format $(sources)

@@ -10,7 +10,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     path = snapshot_download(
-        repo_id="EleutherAI/pythia_deduped_pile_idxmaps",
+        repo_id="EleutherAI/pile-deduped-pythia-preshuffled",
         repo_type="dataset",
         cache_dir=str(args.data_path / args.cache_dir),
         local_dir=str(args.data_path),
