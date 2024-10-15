@@ -1,8 +1,7 @@
-sources = src/ scripts/
+sources = src/ scripts/ notebooks/
 
 format:
-	ruff format $(sources)
+	uv run ruff format $(sources)
 
 lint:
-	ruff check $(sources) --fix
-	torchfix $(sources) --fix
+	uv run ruff check $(sources) --fix

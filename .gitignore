@@ -130,9 +130,9 @@ dmypy.json
 
 # custom
 .ruff_cache
-notebooks
 outputs
 .DS_Store
 .model_cache
 .data_cache
 data/pile*
+data/
