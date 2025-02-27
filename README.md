@@ -23,7 +23,6 @@ To reproduce our experiments, read below.
 First, clone this repo with its submodules
 
 ```bash
-# TODO: rename repo
 git clone --recurse-submodules https://github.com/pietrolesci/memorization-profiles.git
 ```
 which basically pulls [pythia](https://github.com/EleutherAI/pythia) which is used to interact with the Pile dataset.
